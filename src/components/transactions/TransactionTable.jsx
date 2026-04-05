@@ -1,5 +1,5 @@
 import useFinanceStore from "../../store/useFinanceStore";
-import { useState } from "react";
+import { useState,useRef, useEffect } from "react";
 import {
   filterTransactions,
   sortTransactions,
@@ -8,9 +8,27 @@ import {
 function Dropdown({ value, onChange, options }) {
   const [open, setOpen] = useState(false);
   const selected = options.find((o) => o.value === value);
+  const ref = useRef();
+
+  // ✅ Close on click outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <div className="relative w-36">
+    <div
+      ref={ref}
+      className="relative w-36"
+      onMouseLeave={() => setOpen(false)} // ✅ close on hover out
+    >
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex justify-between items-center px-3 py-2 rounded-lg 

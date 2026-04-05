@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import useFinanceStore from "../store/useFinanceStore";
 import {
   filterTransactions,
@@ -12,12 +12,31 @@ import { exportToCSV } from "../utils/export";
 function FilterSelect({ value, onChange, options }) {
   const [open, setOpen] = useState(false);
   const selected = options.find((o) => o.value === value);
+  const ref = useRef();
+
+  // ✅ Close on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <div className="relative w-40">
+    <div
+      ref={ref}
+      className="relative w-40"
+      onMouseLeave={() => setOpen(false)} // ✅ hover-out close
+    >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--text)] text-sm shadow-sm hover:shadow-md"
+        className="w-full flex justify-between items-center px-3 py-2 rounded-lg 
+        bg-[var(--card)] border border-[var(--border)] text-[var(--text)] text-sm shadow-sm hover:shadow-md"
       >
         {selected?.label}
         <span className="text-[var(--muted)]">▼</span>
