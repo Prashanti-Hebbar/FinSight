@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌙 DARK (default) */
+:root {
+  --bg: #020617;
+  --card: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
+  --dropdown: #0f172a;
+  --text: #ffffff;
+  --muted: #9ca3af;
+}
+
+/* ☀️ LIGHT */
+.light {
+  --bg: #c9dbef;              
+  --card: #ffffff;
+
+  --border: #d1d5db;          
+  --dropdown: #ffffff; 
+  --text: #020617;            
+  --muted: #475569;           
+
+  --accent: #2563eb;          
+  --success: #16a34a;         
+  --danger: #dc2626;        
+}
+
+/* Apply globally */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+select {
+  background-color: var(--card);
+  color: var(--text);
+}
+
+/* Reusable */
+.glass {
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+
+* {
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+/* Strong card (primary sections) */
+.card-strong {
+  @apply bg-gradient-to-br from-indigo-500/20 to-purple-500/10 border border-white/10 backdrop-blur-xl;
+}
+
+/* Hover */
+.hover-scale {
+  @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl;
+}
+
+/* Soft glow */
+.glow {
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeSlide {
+  animation: fadeSlide 0.3s ease;
+}
+
+.text-muted {
+  color: var(--muted);
+}
