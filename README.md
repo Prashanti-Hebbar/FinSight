@@ -1,78 +1,109 @@
-# 💸 FinSight — Financial Dashboard
+<h1 align="center">
+  🚀 FinSight — Smart Financial Dashboard
+</h1>
 
-A modern, responsive financial dashboard to track, analyze, and understand personal finances through real-time insights and interactive visualizations.
+<p align="center">
+  <b>Track • Analyze • Improve Your Financial Health</b><br/>
+  A modern, responsive finance dashboard built with performance and UX in mind.
+</p>
 
----
-
-## 🚀 Live Demo
-
-🔗 [https://your-vercel-link.vercel.app](https://fin-sight-liard.vercel.app/)
-
----
-
-## 📌 Overview
-
-**FinSight** is a frontend-driven financial analytics platform that helps users:
-
-* Monitor income, expenses, and balance
-* Explore transaction history
-* Understand spending patterns through visual insights
-* Interact with a role-based UI system
-
-Built with a focus on **clean UI, performance, and user experience**.
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18-blue?logo=react" />
+  <img src="https://img.shields.io/badge/Zustand-State%20Management-purple" />
+  <img src="https://img.shields.io/badge/TailwindCSS-UI-38B2AC?logo=tailwindcss" />
+  <img src="https://img.shields.io/badge/Vercel-Deployed-black?logo=vercel" />
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-success" />
+</p>
 
 ---
 
-## ✨ Features
+## 🌐 Live Demo
 
-### 💰 Dashboard Overview
+🔗 **[View FinSight Live](https://fin-sight-liard.vercel.app/)**
 
-* Summary cards for **Balance, Income, Expenses**
-* Real-time updates based on transactions
+---
+
+## ✨ What is FinSight?
+
+**FinSight** is a data-driven financial dashboard that enables users to:
+
+* 💰 Track income, expenses, and balance in real time
+* 📊 Visualize financial trends and spending behavior
+* 🧠 Gain actionable insights into financial habits
+* 🔐 Interact with a role-based UI (Admin / Viewer)
+
+Designed with **clean UX, responsive layout, and scalable architecture**.
+
+---
+
+## 🎯 Key Features
+
+### 💰 Financial Overview
+
+* Dynamic **Summary Cards** (Balance, Income, Expenses)
+* Real-time updates on transaction changes
 * Monthly trend indicators
 
-### 📊 Data Visualization
+---
 
-* **Balance Trend Chart** (time-based)
-* **Spending Breakdown** (category-wise bar chart)
+### 📊 Interactive Visualizations
+
+* 📈 **Balance Trend Chart** (time-based insights)
+* 📊 **Spending Breakdown** (category-wise analysis)
+
+---
 
 ### 📋 Transaction Management
 
-* View transaction list (date, amount, category, type)
 * Search, filter, and sort transactions
-* Export transactions as **CSV**
+* Detailed transaction history
+* Export data as **CSV**
 
-### 🔐 Role-Based UI (Simulated)
+---
 
-* 👁️ Viewer → read-only access
-* 🛡️ Admin → add, delete, and reset data
+### 🔐 Role-Based UI
+
+| Role       | Access                      |
+| ---------- | --------------------------- |
+| 👁️ Viewer | View-only access            |
+| 🛡️ Admin  | Add, delete, and reset data |
+
+---
 
 ### 🧠 Insights Engine
 
-* Monthly comparison analysis
-* Spending alerts (high / stable / improving)
-* Progress visualization
+* Monthly spending comparison
+* Spending alerts (High / Stable / Improving)
+* Visual progress indicators
+
+---
+
+## 📱 Responsive Design
+
+* 📲 Mobile-first experience
+* 📊 Card layout for transactions on small screens
+* 🖥️ Grid-based dashboard for desktop
+* ⚡ Smooth transitions and interactions
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology   | Usage                   |
-| ------------ | ----------------------- |
-| React.js     | Frontend framework      |
-| Zustand      | State management        |
-| Tailwind CSS | Styling & responsive UI |
-| Recharts     | Data visualization      |
-| LocalStorage | Data persistence        |
-| Vercel       | Deployment              |
+```id="stack"
+Frontend     → React.js  
+State        → Zustand  
+Styling      → Tailwind CSS  
+Charts       → Recharts  
+Persistence  → LocalStorage  
+Deployment   → Vercel  
+```
 
 ---
 
-## 🧩 Project Structure
+## 🧩 Project Architecture
 
-```
+```id="structure"
 src/
-│
 ├── components/
 │   ├── cards/
 │   ├── charts/
@@ -81,6 +112,7 @@ src/
 │
 ├── pages/
 │   ├── Dashboard.jsx
+│   ├── Insights.jsx
 │   └── Transactions.jsx
 │
 ├── store/
@@ -99,9 +131,9 @@ src/
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Getting Started
 
-```bash
+```bash id="setup"
 # Clone repository
 git clone https://github.com/your-username/finsight.git
 
@@ -111,91 +143,63 @@ cd finsight
 # Install dependencies
 npm install
 
-# Start development server
+# Run development server
 npm run dev
 ```
 
 ---
 
-## 📱 Responsive Design
+## ⚡ Performance & Optimization
 
-* Fully responsive across **mobile, tablet, and desktop**
-* Mobile-first improvements:
-
-  * Card layout for transactions
-  * Optimized navigation
-  * Touch-friendly UI
+* Efficient state updates using Zustand
+* Component-based modular architecture
+* Lazy loading for heavy components (optional)
+* Minimal re-renders and optimized UI updates
 
 ---
 
-## 💾 Data Handling
+## 🧪 Edge Cases Handled
 
-* Uses **LocalStorage** for persistence
-* Mock API fallback for initial data
-* Handles:
-
-  * Empty states
-  * Corrupted data
-  * Loading states
+* ✅ Empty transaction state
+* ✅ Invalid/corrupt localStorage data
+* ✅ Division-by-zero handling in insights
+* ✅ Rapid user interactions (add/delete)
+* ✅ Large transaction values
 
 ---
 
-## ⚡ Performance Optimizations
+## 🚀 Future Enhancements
 
-* Component-based architecture
-* Lazy loading (optional)
-* Efficient state updates with Zustand
-* Minimal re-renders
-
----
-
-## 🔍 Edge Cases Handled
-
-* No transactions available
-* Division by zero in analytics
-* Invalid localStorage data
-* Rapid user interactions (add/delete)
-* Large transaction values
+* 🔐 Authentication system
+* 🌐 Backend integration (Node.js / Express)
+* 🤖 AI-based financial insights
+* 🔔 Notification system
+* ↩️ Undo/Redo actions
 
 ---
 
-## 🧪 Testing Checklist
+## 📌 Why This Project Matters
 
-* ✅ Dashboard updates correctly
-* ✅ Filtering & sorting works
-* ✅ Role-based restrictions enforced
-* ✅ Mobile layout optimized
-* ✅ CSV export verified
+This project demonstrates:
+
+* 💡 Real-world frontend architecture
+* 🎨 UI/UX design thinking
+* ⚙️ State management expertise
+* 📊 Data-driven rendering
+* 🧠 Problem-solving with edge cases
 
 ---
 
-## 📈 Future Improvements
+## ⭐ Support
 
-* Backend integration (Node.js / Express)
-* Authentication system
-* Advanced analytics (AI-based insights)
-* Undo/redo actions
-* Notifications & alerts system
+If you like this project:
+
+👉 Star the repo
+👉 Share it
+👉 Use it as inspiration
 
 ---
 
 ## 👩‍💻 Author
 
 **Prashanti Hebbar**
-
----
-
-## ⭐ Acknowledgment
-
-This project was built to demonstrate:
-
-* Frontend engineering skills
-* UI/UX design thinking
-* State management and data handling
-* Real-world application structure
-
----
-
-## 📄 License
-
-This project is open-source and available under the MIT License.
