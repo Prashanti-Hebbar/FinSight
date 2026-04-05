@@ -63,7 +63,7 @@ export default function Barchart() {
     <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] text-[var(--text)] space-y-4">
       {/* HEADER */}
       <div className="flex justify-between items-center">
-        <h2 className="text-lg font-semibold">Spending Insights</h2>
+        <h2 className="text-lg font-semibold">Spending Analysis</h2>
         <span className="text-xs text-[var(--muted)]">
           Total: {formatCurrency(total)}
         </span>
