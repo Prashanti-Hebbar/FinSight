@@ -6,7 +6,7 @@ A modern, responsive financial dashboard to track, analyze, and understand perso
 
 ## 🚀 Live Demo
 
-🔗 https://your-vercel-link.vercel.app
+🔗 [https://your-vercel-link.vercel.app](https://fin-sight-liard.vercel.app/)
 
 ---
 
