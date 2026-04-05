@@ -4,7 +4,7 @@ import { TrendingUp, TrendingDown, AlertTriangle } from "lucide-react";
 
 export default function Insights() {
   const transactions = useFinanceStore((s) => s.transactions);
-
+  const role = useFinanceStore((s) => s.role);
   const comparison = getMonthlyComparison(transactions);
   const monthlyData = groupByMonth(transactions);
 
@@ -21,18 +21,14 @@ export default function Insights() {
 
   return (
     <div className="p-5 rounded-2xl bg-[var(--card)] border border-[var(--border)] text-[var(--text)] space-y-5">
-
       {/* HEADER */}
       <h2 className="font-semibold text-lg">Insights</h2>
 
       {/* 🔥 MAIN INSIGHT */}
       {!comparison ? (
-        <p className="text-[var(--muted)] text-sm">
-          Not enough data yet
-        </p>
+        <p className="text-[var(--muted)] text-sm">Not enough data yet</p>
       ) : (
         <div className="flex items-start gap-3 p-4 rounded-xl background: var(--card)">
-
           {comparison.change > 0 ? (
             <TrendingUp className="text-red-400" size={20} />
           ) : (
@@ -60,8 +56,8 @@ export default function Insights() {
             comparison.change > 20
               ? "bg-red-500/10 text-red-400"
               : comparison.change < -10
-              ? "bg-green-500/10 text-green-400"
-              : "bg-yellow-500/10 text-yellow-400"
+                ? "bg-green-500/10 text-green-400"
+                : "bg-yellow-500/10 text-yellow-400"
           }`}
         >
           <AlertTriangle size={14} />
@@ -79,18 +75,15 @@ export default function Insights() {
           const data = monthlyData[key];
 
           const total = data.income + data.expense;
-          const expensePercent =
-            total === 0 ? 0 : (data.expense / total) * 100;
+          const expensePercent = total === 0 ? 0 : (data.expense / total) * 100;
 
           return (
             <div key={key} className="space-y-1">
-              
               {/* HEADER */}
               <div className="flex justify-between text-xs text-[var(--muted)]">
                 <span>{key}</span>
                 <span>
-                  {formatCurrency(data.income)} /{" "}
-                  {formatCurrency(data.expense)}
+                  {formatCurrency(data.income)} / {formatCurrency(data.expense)}
                 </span>
               </div>
 
@@ -107,16 +100,19 @@ export default function Insights() {
       </div>
 
       {/* RESET */}
-      <button
-        onClick={() => {
-          if (!window.confirm("Reset all data?")) return;
-          localStorage.removeItem("finance-data");
-          window.location.reload();
-        }}
-        className="text-xs text-red-400 hover:text-red-300"
-      >
-        Reset Data
-      </button>
+
+      {role === "admin" && (
+        <button
+          onClick={() => {
+            if (!window.confirm("Reset all data?")) return;
+            localStorage.removeItem("finance-data");
+            window.location.reload();
+          }}
+          className="text-xs text-red-400 hover:text-red-300"
+        >
+          Reset Data
+        </button>
+      )}
     </div>
   );
 }
