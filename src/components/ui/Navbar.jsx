@@ -1,16 +1,9 @@
 import { useState } from "react";
 import Dashboard from "../../pages/Dashboard";
 import Transactions from "../../pages/Transactions";
-import ThemeToggle from './ThemeToggle';
+import ThemeToggle from "./ThemeToggle";
 import logo from "../../assets/FinSight-logo.png";
-import {
-  LayoutDashboard,
-  Receipt,
-  Menu,
-  X,
-  User,
-  LogOut,
-} from "lucide-react";
+import { LayoutDashboard, Receipt, Menu, X, User, LogOut } from "lucide-react";
 
 export default function Navbar() {
   const [page, setPage] = useState("dashboard");
@@ -26,31 +19,35 @@ export default function Navbar() {
           setPage(value);
           setMobileOpen(false);
         }}
-        className="relative flex items-center gap-2 px-3 py-2 text-sm transition text-[var(--muted)] hover:text-[var(--text)]"
+        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition
+        ${
+          active
+            ? "bg-blue-500/10 text-blue-400"
+            : "text-[var(--muted)] hover:bg-white/5 hover:text-[var(--text)]"
+        }`}
       >
         {icon}
         {label}
-
-        {/* 🔥 ACTIVE INDICATOR */}
-        {active && (
-          <span className="absolute left-0 bottom-0 w-full h-[2px] bg-blue-500 rounded-full" />
-        )}
       </button>
     );
   };
 
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-      
       {/* 🔝 NAVBAR */}
       <div className="flex justify-between items-center px-6 h-14 border-b border-white/5 backdrop-blur sticky top-0 z-50">
-
         {/* LEFT */}
         <div className="flex items-center gap-6">
-
           {/* LOGO */}
           <div className="flex items-center gap-2">
-            <img src={logo} className="h-60 w-44 object-contain" />
+            <img
+              src={logo}
+              className="h-60 w-44 object-contain cursor-pointer"
+              onClick={() => {
+                setPage("dashboard");
+                setMobileOpen(false);
+              }}
+            />
           </div>
 
           {/* DESKTOP NAV */}
@@ -70,7 +67,6 @@ export default function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-3">
-
           <ThemeToggle />
 
           {/* PROFILE */}
@@ -87,7 +83,6 @@ export default function Navbar() {
                 <div className="px-3 py-2 text-sm text-[var(--muted)]">
                   My Profile
                 </div>
-    
               </div>
             )}
           </div>
@@ -104,7 +99,7 @@ export default function Navbar() {
 
       {/* 📱 MOBILE MENU */}
       {mobileOpen && (
-        <div className="md:hidden px-6 py-4 space-y-3 border-b border-[var(--border)] bg-[var(--card)]">
+        <div className="md:hidden px-4 py-4 space-y-2 border-b border-[var(--border)] bg-[var(--card)]">
           <NavItem
             label="Dashboard"
             value="dashboard"
@@ -120,10 +115,7 @@ export default function Navbar() {
 
       {/* 🔥 PAGE TRANSITION */}
       <div className="p-6">
-        <div
-          key={page}
-          className="animate-fadeSlide"
-        >
+        <div key={page} className="animate-fadeSlide">
           {page === "dashboard" ? <Dashboard /> : <Transactions />}
         </div>
       </div>

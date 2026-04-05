@@ -57,7 +57,6 @@ export default function TransactionTable() {
 
   const [sortBy, setSortBy] = useState("date-new");
 
-  // ✅ use shared logic
   const filtered = filterTransactions(transactions, filters);
   const sorted = sortTransactions(filtered, sortBy);
 
@@ -65,6 +64,12 @@ export default function TransactionTable() {
     if (!window.confirm("Delete this transaction?")) return;
     deleteTransaction(id);
   };
+
+  const formatDate = (date) =>
+    new Date(date).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+    });
 
   return (
     <div className="glass p-5 rounded-2xl space-y-4">
@@ -78,7 +83,6 @@ export default function TransactionTable() {
           }
         />
 
-        {/* TYPE FILTER */}
         <Dropdown
           value={filters.type}
           onChange={(val) =>
@@ -91,7 +95,6 @@ export default function TransactionTable() {
           ]}
         />
 
-        {/* SORT */}
         <Dropdown
           value={sortBy}
           onChange={setSortBy}
@@ -104,8 +107,51 @@ export default function TransactionTable() {
         />
       </div>
 
-      {/* 📊 TABLE */}
-      <div className="overflow-x-auto">
+      {/* 📱 MOBILE VIEW */}
+      <div className="md:hidden space-y-3">
+        {sorted.length === 0 ? (
+          <p className="text-center text-[var(--muted)] py-10">
+            No transactions found
+          </p>
+        ) : (
+          sorted.map((t) => (
+            <div
+              key={t.id}
+              className="p-4 rounded-xl bg-[var(--card)] border border-[var(--border)] space-y-2"
+            >
+              <div className="flex justify-between text-xs text-[var(--muted)]">
+                <span>{formatDate(t.date)}</span>
+                <span
+                  className={`px-2 py-1 rounded-full text-xs ${
+                    t.type === "income"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-600"
+                  }`}
+                >
+                  {t.type}
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <span className="font-medium">{t.category}</span>
+                <span className="font-semibold">₹ {t.amount}</span>
+              </div>
+
+              {role === "admin" && (
+                <button
+                  onClick={() => handleDelete(t.id)}
+                  className="text-red-400 text-sm"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* 💻 DESKTOP TABLE */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm table-fixed">
           <thead>
             <tr className="text-left text-[var(--muted)] border-b border-[var(--border)]">
@@ -120,54 +166,39 @@ export default function TransactionTable() {
           </thead>
 
           <tbody>
-            {sorted.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={role === "admin" ? 5 : 4}
-                  className="text-center py-10 text-[var(--muted)]"
-                >
-                  No transactions found
+            {sorted.map((t) => (
+              <tr
+                key={t.id}
+                className="border-b border-[var(--border)] hover:bg-black/5 transition"
+              >
+                <td className="py-3">{formatDate(t.date)}</td>
+                <td className="font-medium">{t.category}</td>
+                <td className="text-right font-semibold">
+                  ₹ {t.amount}
                 </td>
-              </tr>
-            ) : (
-              sorted.map((t) => (
-                <tr
-                  key={t.id}
-                  className="border-b border-[var(--border)] hover:bg-black/5 transition"
-                >
-                  <td className="py-3">{t.date}</td>
-
-                  <td className="font-medium">{t.category}</td>
-
-                  <td className="text-right font-semibold">
-                    ₹ {t.amount}
-                  </td>
-
-                  <td className="text-center">
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        t.type === "income"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-600"
-                      }`}
+                <td className="text-center">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      t.type === "income"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-600"
+                    }`}
+                  >
+                    {t.type}
+                  </span>
+                </td>
+                {role === "admin" && (
+                  <td className="text-right">
+                    <button
+                      onClick={() => handleDelete(t.id)}
+                      className="text-red-400 hover:text-red-300 transition"
                     >
-                      {t.type}
-                    </span>
+                      Delete
+                    </button>
                   </td>
-
-                  {role === "admin" && (
-                    <td className="text-right">
-                      <button
-                        onClick={() => handleDelete(t.id)}
-                        className="text-red-400 hover:text-red-300 transition"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  )}
-                </tr>
-              ))
-            )}
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
